@@ -43,6 +43,6 @@ git fetch upstream
 git reset upstream/gh-pages
 cp $BUILD_DIR/* $REPO_DIR
 
-git add -A $REPO_DIR
-git commit --message "$COMMIT_MSG"
-git push upstream HEAD:gh-pages
+#git add -A $REPO_DIR
+#git commit --message "$COMMIT_MSG"
+#git push upstream HEAD:gh-pages
