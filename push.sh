@@ -10,7 +10,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-set -x
 
 setup_git() {
   git config --global user.email "travis@travis-ci.org"
@@ -18,13 +17,12 @@ setup_git() {
 
   git remote add upstream "https://$GH_TOKEN@github.com/migmartri/helm-hack-night-charts.git"
   git fetch upstream
-  git reset upstream/master
 }
 
-commit_website_files() {
+commit_files() {
   git add docs/*
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
-  git push upstream master
+  git push upstream HEAD:master
 }
 
 
@@ -35,4 +33,4 @@ then
 fi
 
 setup_git
-commit_website_files
+commit_files
