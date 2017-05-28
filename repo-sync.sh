@@ -68,7 +68,7 @@ git checkout gh-pages
 cp $BUILD_DIR/* $REPO_DIR
 
 log "Commiting changes to gh-pages branch"
-git add -A
+git add *.tgz index.yaml
 git commit --message "$COMMIT_MSG"
 git push upstream HEAD:gh-pages
 
