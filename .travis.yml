@@ -11,8 +11,8 @@ install:
 
 script:
   - bash ./repo-sync.sh
-after_success:
-  - bash ./push.sh
+#after_success:
+#  - bash ./push.sh
 
 env:
   global:
