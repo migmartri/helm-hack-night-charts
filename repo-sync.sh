@@ -11,16 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Setup Helm
-#HELM_URL=https://storage.googleapis.com/kubernetes-helm
-#HELM_TARBALL=helm-v2.1.3-linux-amd64.tar.gz
-#wget -q ${HELM_URL}/${HELM_TARBALL}
-#tar xzfv ${HELM_TARBALL}
-#PATH=`pwd`/linux-amd64/:$PATH
-#helm init --client-only
-
 REPO_URL=https://migmartri.github.io/helm-hack-night-charts
-
 REPO_DIR=docs
 
 # Package all charts and update index
