@@ -2,20 +2,20 @@ apiVersion: v1
 entries:
   node-todo:
   - apiVersion: v1
-    created: 2017-05-28T23:18:57.301919979Z
+    created: 2017-05-28T23:20:36.455087396Z
     description: Amazing Todo List Application
-    digest: 733c4f1bf22ff5ec4232405decbe899e57e560f085d6fc7ea25b90af1f4d812e
+    digest: 9ec8f6362d337d2c5917af74b57af58ccfa88ba6f3c8fd0b266a1e93a11e18de
     name: node-todo
     urls:
-    - https://migmartri.github.io/helm-hack-night-charts/node-todo-0.1.5.tgz
-    version: 0.1.5
+    - https://migmartri.github.io/helm-hack-night-charts/node-todo-0.1.8.tgz
+    version: 0.1.8
   node-todo2:
   - apiVersion: v1
-    created: 2017-05-28T23:18:57.30308254Z
+    created: 2017-05-28T23:20:36.455703084Z
     description: Amazing Todo List Application
-    digest: f68aa82630235f60b18c3304c1a178f6473984747f9359e7f7feb22063bb39bd
+    digest: 2a3eea876aed97c59da7ba001a52cdc7d1959150117cf71e4d9028b417c055a5
     name: node-todo2
     urls:
     - https://migmartri.github.io/helm-hack-night-charts/node-todo2-0.3.tgz
     version: "0.3"
-generated: 2017-05-28T23:18:57.300543243Z
+generated: 2017-05-28T23:20:36.454324487Z
