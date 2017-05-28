@@ -1,7 +1,5 @@
 ## Customize the test machine
 machine:
-  timezone:
-    America/Los_Angeles # Set the timezone
   environment:
     HELM_URL=https://storage.googleapis.com/kubernetes-helm
     HELM_TARBALL=helm-v2.1.3-linux-amd64.tar.gz
@@ -14,6 +12,8 @@ dependencies:
     - PATH=`pwd`/linux-amd64/:$PATH
     - helm init --client-only
 
-compile:
-  override:
-    - bash ./repo-sync.sh
+deployment:
+  master:
+    branch: master
+    commands:
+      - bash ./repo-sync.sh
