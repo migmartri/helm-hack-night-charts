@@ -38,6 +38,20 @@ COMMIT_MSG="Updating chart repository"
 
 show_important_vars
 
+if [ ! -z $TRAVIS ]; then
+  log "Configuring git for Travis-ci"
+  travis_setup_git
+else
+  git remote add upstream git@github.com:migmartri/helm-hack-night-charts.git || true
+fi
+
+git fetch upstream
+
+log "Initialize build directory with existing charts"
+git checkout gh-pages
+cp *.tgz index.yaml $BUILD_DIR
+git checkout master
+
 # Package all charts and update index in temporary buildDir
 pushd $BUILD_DIR
   for dir in `ls $REPO_DIR/charts`;do
@@ -47,21 +61,13 @@ pushd $BUILD_DIR
   done
 
   log "Indexing repository"
-  helm repo index --url ${REPO_URL} .
+  helm repo index --url ${REPO_URL} --merge index.yaml .
 popd
 
-if [ ! -z $TRAVIS ]; then
-  log "Configuring git for Travis-ci"
-  travis_setup_git
-else
-  git remote add upstream git@github.com:migmartri/helm-hack-night-charts.git || true
-fi
-
-git fetch upstream
-git reset upstream/gh-pages
-cp $BUILD_DIR/* $REPO_DIR
-
-log "Commiting changes to gh-pages branch"
-git add *.tgz index.yaml
-git commit --message "$COMMIT_MSG"
-git push upstream HEAD:gh-pages
+#git reset upstream/gh-pages
+#cp $BUILD_DIR/* $REPO_DIR
+#
+#log "Commiting changes to gh-pages branch"
+#git add *.tgz index.yaml
+#git commit --message "$COMMIT_MSG"
+#git push upstream HEAD:gh-pages
