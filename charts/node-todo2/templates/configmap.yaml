@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+  database.js: |-
+    module.exports = {
+      localUrl: 'mongodb://{{ template "mongodb.fullname" . }}/todo-{{ .Release.Namespace }}'
+    };
