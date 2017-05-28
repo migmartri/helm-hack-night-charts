@@ -18,11 +18,20 @@ travis_setup_git() {
   git remote add upstream "https://$GH_TOKEN@github.com/migmartri/helm-hack-night-charts.git"
 }
 
+show_important_vars() {
+    echo "  REPO_URL: $REPO_UR"
+    echo "  BUILD_DIR: $BUILD_DIR"
+    echo "  REPO_DIR: $REPO_DIR"
+    echo "  TRAVIS: $TRAVIS"
+}
+
 REPO_URL=https://migmartri.github.io/helm-hack-night-charts
 BUILD_DIR=$(mktemp -d)
 # Current directory
 REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 COMMIT_MSG="Updating chart repository"
+
+show_important_vars
 
 # Package all charts and update index in temporary buildDir
 pushd $BUILD_DIR
