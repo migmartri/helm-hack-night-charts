@@ -11,14 +11,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-REPO_URL=https://migmartri.github.io/helm-hack-night-charts
-REPO_DIR=docs
 
-# Package all charts and update index
-pushd $REPO_DIR
-  for dir in `ls ../charts`;do
-    helm dep update ../charts/$dir
-    helm package ../charts/$dir
-  done
-  helm repo index --url ${REPO_URL} --merge ./index.yaml .
-popd
+setup_git() {
+  git config --global user.email "travis@travis-ci.org"
+  git config --global user.name "Travis CI"
+
+  git remote add upstream "https://$GH_TOKEN@github.com/migmartri/helm-hack-night-charts.git"
+  git fetch upstream
+}
+
+commit_website_files() {
+  git add docs/*
+  git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
+  git push upstream master
+}
+
+
+if [ "$TRAVIS_BRANCH" != "master" ]
+then
+  echo "\$TRAVIS_BRANCH" needs to be master to continue.
+  exit 0
+fi
+
+setup_git
+commit_website_files
