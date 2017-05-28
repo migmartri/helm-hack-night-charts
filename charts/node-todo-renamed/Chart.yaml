@@ -1,4 +1,4 @@
 apiVersion: v1
 description: Amazing Todo List Application
-name: node-todo2
-version: 1.0
+name: node-todo-renamed
+version: 1.2
