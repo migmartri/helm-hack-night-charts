@@ -18,12 +18,13 @@ setup_git() {
 
   git remote add upstream "https://$GH_TOKEN@github.com/migmartri/helm-hack-night-charts.git"
   git fetch upstream
+  git reset upstream/master
 }
 
 commit_website_files() {
   git add docs/*
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
-  git push --set-upstream upstream master
+  git push upstream master
 }
 
 
