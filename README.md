@@ -1,1 +1,0 @@
-# helm-hack-night-charts
