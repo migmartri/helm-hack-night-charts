@@ -23,7 +23,7 @@ setup_git() {
 commit_website_files() {
   git add docs/*
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
-  git push upstream master
+  git push --set-upstream upstream master
 }
 
 
