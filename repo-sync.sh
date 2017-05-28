@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -12,13 +12,15 @@
 # limitations under the License.
 
 REPO_URL=https://migmartri.github.io/helm-hack-night-charts
-REPO_DIR=docs
+BUILD_DIR=`mktemp -d`
+# Current directory
+REPO_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Package all charts and update index
-pushd $REPO_DIR
-  for dir in `ls ../charts`;do
-    helm dep update ../charts/$dir
-    helm package ../charts/$dir
+pushd $BUILD_DIR
+  for dir in `ls $REPO_DIR/charts`;do
+    helm dep update $REPO_DIR/charts/$dir
+    helm package $REPO_DIR/charts/$dir
   done
-  helm repo index --url ${REPO_URL} --merge ./index.yaml .
+  helm repo index --url ${REPO_URL} .
 popd

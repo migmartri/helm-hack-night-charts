@@ -12,8 +12,8 @@
 # limitations under the License.
 
 setup_git() {
-  git config --global user.email "travis@travis-ci.org"
-  git config --global user.name "Travis CI"
+  git config user.email "travis@travis-ci.org"
+  git config user.name "Travis CI"
 
   git remote add upstream "https://$GH_TOKEN@github.com/migmartri/helm-hack-night-charts.git"
   git fetch upstream
