@@ -47,12 +47,13 @@ fi
 
 git fetch upstream
 
-log "Initialize build directory with existing charts"
 git checkout gh-pages
+log "Initializing build directory with existing charts"
 cp * $BUILD_DIR
 git checkout master
 
 # Package all charts and update index in temporary buildDir
+log "Packaging charts from source code"
 pushd $BUILD_DIR
   for dir in `ls $REPO_DIR/charts`;do
     log "Packaging $dir"
@@ -64,13 +65,13 @@ pushd $BUILD_DIR
   helm repo index --url ${REPO_URL} --merge index.yaml .
 popd
 
-git checkout gh-pages
+git reset upstream/gh-pages
 cp $BUILD_DIR/* $REPO_DIR
 
 log "Commiting changes to gh-pages branch"
 git add *.tgz index.yaml
 git commit --message "$COMMIT_MSG"
-git push upstream HEAD:gh-pages
+git push -q upstream HEAD:gh-pages
 
 log "Reset state"
-git checkout master
+git reset --hard master
