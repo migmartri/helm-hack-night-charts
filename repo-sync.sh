@@ -12,6 +12,8 @@
 # limitations under the License.
 #
 
+# USAGE: repo-sync.sh <commit-changes?>
+
 log () {
   echo -e "\033[0;33m$(date "+%H:%M:%S")\033[0;37m ==> $1."
 }
@@ -28,8 +30,12 @@ show_important_vars() {
     echo "  BUILD_DIR: $BUILD_DIR"
     echo "  REPO_DIR: $REPO_DIR"
     echo "  TRAVIS: $TRAVIS"
+    echo "  COMMIT_CHANGES: $COMMIT_CHANGES"
 }
 
+COMMIT_CHANGES="${1}"
+: ${COMMIT_CHANGES:=false}
+: ${TRAVIS:=false}
 REPO_URL=https://migmartri.github.io/helm-hack-night-charts
 BUILD_DIR=$(mktemp -d)
 # Current directory
@@ -38,7 +44,7 @@ COMMIT_MSG="Updating chart repository"
 
 show_important_vars
 
-if [ ! -z $TRAVIS ]; then
+if [ $TRAVIS != false ]; then
   log "Configuring git for Travis-ci"
   travis_setup_git
 else
@@ -70,14 +76,16 @@ pushd $BUILD_DIR
     helm repo index --url ${REPO_URL} .
   fi
 popd
-
 git reset upstream/gh-pages
 cp $BUILD_DIR/* $REPO_DIR
 
-log "Commiting changes to gh-pages branch"
-git add *.tgz index.yaml
-git commit --message "$COMMIT_MSG"
-git push -q upstream HEAD:gh-pages
+# Commit changes are not enabled during PR
+if [ $COMMIT_CHANGES != "false" ]; then
+  log "Commiting changes to gh-pages branch"
+  git add *.tgz index.yaml
+  git commit --message "$COMMIT_MSG"
+  git push -q upstream HEAD:gh-pages
+fi
 
 log "Repository cleanup and reset"
 git reset --hard upstream/master
