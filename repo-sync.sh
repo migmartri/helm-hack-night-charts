@@ -24,7 +24,7 @@ travis_setup_git() {
 }
 
 show_important_vars() {
-    echo "  REPO_URL: $REPO_UR"
+    echo "  REPO_URL: $REPO_URL"
     echo "  BUILD_DIR: $BUILD_DIR"
     echo "  REPO_DIR: $REPO_DIR"
     echo "  TRAVIS: $TRAVIS"
@@ -48,8 +48,10 @@ fi
 git fetch upstream
 
 git checkout gh-pages
-log "Initializing build directory with existing charts"
-cp * $BUILD_DIR
+log "Initializing build directory with existing charts index"
+if [ -f index.yaml ]; then
+  cp index.yaml $BUILD_DIR
+fi
 git checkout master
 
 # Package all charts and update index in temporary buildDir
@@ -62,7 +64,11 @@ pushd $BUILD_DIR
   done
 
   log "Indexing repository"
-  helm repo index --url ${REPO_URL} --merge index.yaml .
+  if [ -f index.yaml ]; then
+    helm repo index --url ${REPO_URL} --merge index.yaml .
+  else
+    helm repo index --url ${REPO_URL} .
+  fi
 popd
 
 git reset upstream/gh-pages
@@ -73,5 +79,6 @@ git add *.tgz index.yaml
 git commit --message "$COMMIT_MSG"
 git push -q upstream HEAD:gh-pages
 
-log "Reset state"
-git reset --hard master
+log "Repository cleanup and reset"
+git reset --hard upstream/master
+git clean -df .
