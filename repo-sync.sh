@@ -44,7 +44,7 @@ COMMIT_MSG="Updating chart repository"
 
 show_important_vars
 
-if [ $TRAVIS != false ]; then
+if [ $TRAVIS != "false" ]; then
   log "Configuring git for Travis-ci"
   travis_setup_git
 else
@@ -52,12 +52,13 @@ else
 fi
 
 git fetch upstream
-
 git checkout gh-pages
+
 log "Initializing build directory with existing charts index"
 if [ -f index.yaml ]; then
   cp index.yaml $BUILD_DIR
 fi
+
 git checkout master
 
 # Package all charts and update index in temporary buildDir
@@ -76,6 +77,7 @@ pushd $BUILD_DIR
     helm repo index --url ${REPO_URL} .
   fi
 popd
+
 git reset upstream/gh-pages
 cp $BUILD_DIR/* $REPO_DIR
 
