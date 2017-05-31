@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  node-todo:
+  - apiVersion: v1
+    created: 2017-05-31T01:57:35.775414927Z
+    description: Amazing Todo List Application
+    digest: 30db8f787b47c971ca3e080d382483868dcb73b6418b7fba462a335bacf3c0c7
+    icon: https://datamountaineer.com/wp-content/uploads/2016/09/helm.png
+    name: node-todo
+    urls:
+    - https://migmartri.github.io/helm-hack-night-charts/node-todo-0.0.1.tgz
+    version: 0.0.1
+generated: 2017-05-31T01:57:35.77460518Z
