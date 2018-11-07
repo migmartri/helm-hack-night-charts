@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   foobar:
   - apiVersion: v1
-    created: 2017-06-02T02:37:03.852081206Z
+    created: 2018-11-07T01:50:43.267338419Z
     description: A Helm chart for Kubernetes
     digest: 87c3d659a61af801d2af7747c827aa4528e37b5e514dec5bf4f00774810a9e2f
     name: foobar
@@ -10,6 +10,15 @@ entries:
     - https://migmartri.github.io/helm-hack-night-charts/foobar-0.1.0.tgz
     version: 0.1.0
   node-todo:
+  - apiVersion: v1
+    created: 2018-11-07T01:50:43.267956738Z
+    description: Amazing Todo List Application
+    digest: 35d7373f019f848e8b7cd8a7198cf659b7225b6683ffae907f25b7de4649e9e7
+    icon: https://datamountaineer.com/wp-content/uploads/2016/09/helm.png
+    name: node-todo
+    urls:
+    - https://migmartri.github.io/helm-hack-night-charts/node-todo-0.0.3.tgz
+    version: 0.0.3
   - apiVersion: v1
     created: 2017-06-02T02:37:03.853167325Z
     description: Amazing Todo List Application
@@ -28,4 +37,4 @@ entries:
     urls:
     - https://migmartri.github.io/helm-hack-night-charts/node-todo-0.0.1.tgz
     version: 0.0.1
-generated: 2017-06-02T02:37:03.851454553Z
+generated: 2018-11-07T01:50:43.266941118Z
